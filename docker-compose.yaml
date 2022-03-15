@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  selenium:
+    image: selenium/standalone-chrome:4.1.2-20220217
+    ports:
+    - "4444:4444"
+    - "7900:7900"
+    shm_size: "2gb"
+    restart: always
+
+  automation-bookstore:
+    build:
+      context: .
+    command: sh -c "mvn test"
+    depends_on:
+    - selenium
